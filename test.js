@@ -4,7 +4,7 @@ var ip = require('./');
 
 var range = ip.range('192.168.0.1')
 
-assert(range.valid, range.errors);
+assert(range.valid)
 assert(range.contains('192.168.0.1'));
 assert(!range.contains('192.168.0.0'));
 

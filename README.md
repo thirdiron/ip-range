@@ -27,6 +27,6 @@ Usage
     var ip = require('ip-range')
 
     ip.range('192.168.0.*').valid //true
-    ip.range('not valid').errorMessage //invalid character "n" in field 0
+    ip.range('not valid').errorMessage //[error in octet 1, invalid octet spec: 'not valid']
     ip.range('10.0.0.1-10').contains('10.0.0.3', '10.0.0.10') //true
   
