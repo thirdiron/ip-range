@@ -6,7 +6,7 @@
   "scripts": {
     "test": "node test.js"
   },
-  "repository" : {
+  "repository": {
     "type": "git",
     "url": "http://github.com/sberan/ip-range.git"
   },
@@ -15,5 +15,8 @@
     "range"
   ],
   "author": "Sam Beran",
-  "license": "BSD"
+  "license": "BSD",
+  "dependencies": {
+    "ip-subnet-calculator": "^1.0.2"
+  }
 }
