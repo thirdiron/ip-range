@@ -44,17 +44,15 @@ assert.equal(ip.range('1.0.*.*').inetAddresses[0], '1.0.0.0/16');
 // much as to cause us preformance problems.  We can leave
 // eliminating redundant ranges as a possible opportunity for
 // improvement.
+//
+//  This result currently includes 1.2.3.10/32, which is redundant
 assert.equal(ip.range('1.2.3.4-10').inetAddresses.length, 3);
-assert.notEqual(ip.range('1.2.3.4-10').inetAddresses.indexOf('1.2.3.4/30'), -1);
-assert.notEqual(ip.range('1.2.3.4-10').inetAddresses.indexOf('1.2.3.8/31'), -1);
-//  Additionally, the result currently includes 1.2.3.10/32, which is redundant
+assert.deepEqual(ip.range('1.2.3.4-10').inetAddresses.sort(), ['1.2.3.10/32', 
+                 '1.2.3.4/30', '1.2.3.8/31' ]);
+
 
 // Non-contiguous ranges need multiple cidr notation ranges
 // to specify as well
 assert.equal(ip.range('1.2.0-5.0').inetAddresses.length, 6);
-assert.notEqual(ip.range('1.2.0-5.0').inetAddresses.indexOf('1.2.0.0/32'), -1);
-assert.notEqual(ip.range('1.2.0-5.0').inetAddresses.indexOf('1.2.1.0/32'), -1);
-assert.notEqual(ip.range('1.2.0-5.0').inetAddresses.indexOf('1.2.2.0/32'), -1);
-assert.notEqual(ip.range('1.2.0-5.0').inetAddresses.indexOf('1.2.3.0/32'), -1);
-assert.notEqual(ip.range('1.2.0-5.0').inetAddresses.indexOf('1.2.4.0/32'), -1);
-assert.notEqual(ip.range('1.2.0-5.0').inetAddresses.indexOf('1.2.5.0/32'), -1);
+assert.deepEqual(ip.range('1.2.0-5.0').inetAddresses.sort(), ['1.2.0.0/32', 
+                 '1.2.1.0/32', '1.2.2.0/32', '1.2.3.0/32', '1.2.4.0/32', '1.2.5.0/32']);
