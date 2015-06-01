@@ -17,7 +17,8 @@ assert.equal(ip.range("0-255.1.1.1").errors, "Hyphenated values not allowed in f
 assert.equal(ip.range("1.0-255.1.1").errors, "Hyphenated values not allowed in first or second octet. ");
 
 
-assert.equal(ip.range("123").errors, "IP must contain 4 octets, contained: 1");
+assert.equal(ip.range("abc").errors[0], "IP must contain 4 octets, contained: 1");
+assert.equal(ip.range("abc").errors[1], "error in octet 1, invalid octet spec: 'abc'");
 assert.equal(ip.range("1.2").errors, "IP must contain 4 octets, contained: 2");
 assert.equal(ip.range("1.2.3").errors, "IP must contain 4 octets, contained: 3");
 assert.equal(ip.range("1.2.3.a").errors, "error in octet 4, invalid octet spec: 'a'");
