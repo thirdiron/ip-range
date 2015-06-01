@@ -22,16 +22,16 @@ exports.range = varArgs(function(specs) {
   var parsedSpecs = specs.map(function(spec) {
     var octets = spec.split(".");
 
-    if(octets[0].indexOf('-') != -1 || octets[1].indexOf('-') != -1) {
-      errors.push("Hyphenated values not allowed in first or second octet. ");
-    }
-
-    if(octets[0].indexOf('*') != -1 || octets[1].indexOf('*') != -1) {
-      errors.push("Wildcards are not allowed in the first or second octet. ");
-    }
-
     if(octets.length != 4) {
       errors.push("IP must contain 4 octets, contained: " + octets.length);
+    } else {
+        if(octets[0].indexOf('-') != -1 || octets[1].indexOf('-') != -1) {
+          errors.push("Hyphenated values not allowed in first or second octet. ");
+        }
+
+        if(octets[0].indexOf('*') != -1 || octets[1].indexOf('*') != -1) {
+          errors.push("Wildcards are not allowed in the first or second octet. ");
+        }
     }
 
     return octets.map(function(octet, i) {
