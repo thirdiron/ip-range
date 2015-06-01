@@ -1,12 +1,12 @@
 {
   "name": "ip-range",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "An IP range parser",
   "main": "range.js",
   "scripts": {
     "test": "node test.js"
   },
-  "repository" : {
+  "repository": {
     "type": "git",
     "url": "http://github.com/sberan/ip-range.git"
   },
@@ -15,5 +15,8 @@
     "range"
   ],
   "author": "Sam Beran",
-  "license": "BSD"
+  "license": "BSD",
+  "dependencies": {
+    "ip-subnet-calculator": "^1.0.2"
+  }
 }
