@@ -63,8 +63,7 @@ exports.range = varArgs(function(specs) {
       if (parsedSpec[3][0] === 0 && parsedSpec[3][1] === 255) {
         fromAddress = prefix + parsedSpec[2][0].toString() + '.0';
         toAddress = prefix + parsedSpec[2][1].toString() + '.255';
-        masks = ipCalc.calculate(fromAddress, toAddress);
-        Array.prototype.push.apply(inetAddresses, masks.map(mapCalculatorResponseToCIDRNotation));
+        checkSubnetMask(fromAddress, toAddress);
       } else {
         // Otherwise we need to treat each value within the range of the 3rd octet as its
         // own range represented by its own set of inet address/mask combinations
@@ -72,10 +71,20 @@ exports.range = varArgs(function(specs) {
           fromAddress = prefix + j + '.' + parsedSpec[3][0];
           toAddress = prefix + j + '.' + parsedSpec[3][1];
           masks = ipCalc.calculate(fromAddress, toAddress);
-          Array.prototype.push.apply(inetAddresses, masks.map(mapCalculatorResponseToCIDRNotation));
+          checkSubnetMask(fromAddress, toAddress);
         }
       }
     });
+
+    function checkSubnetMask(fromAddress, toAddress) {
+      masks = ipCalc.calculate(fromAddress, toAddress);
+      if (masks) {
+        Array.prototype.push.apply(inetAddresses, masks.map(mapCalculatorResponseToCIDRNotation))
+      } else { // ip-subnet-calculator returns null if error found
+        errors.push("Internal error in ip-subnet-calculator for ip range value: " + specs);
+      }
+    }
+
   }
   return {
     valid: errors.length === 0,
