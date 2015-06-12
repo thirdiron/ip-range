@@ -80,8 +80,8 @@ exports.range = varArgs(function(specs) {
       masks = ipCalc.calculate(fromAddress, toAddress);
       if (masks) {
         Array.prototype.push.apply(inetAddresses, masks.map(mapCalculatorResponseToCIDRNotation))
-      } else { // ipCalc returns null if error found
-        errors.push("IP subnet mask error, check start and end range: " + fromAddress + " - " + toAddress);
+      } else { // ip-subnet-calculator returns null if error found
+        errors.push("Internal error in ip-subnet-calculator for ip range value: " + specs);
       }
     }
 

@@ -25,8 +25,8 @@ assert.equal(ip.range("1.2.3.a").errors, "error in octet 4, invalid octet spec: 
 assert.equal(ip.range("1.2.3.266").errors, "error in octet 4, octet range out of bounds: '266'");
 
 // check valid subnet
-assert.equal(ip.range("52.123.5-3.*").errors, "IP subnet mask error, check start and end range: 52.123.5.0 - 52.123.3.255");
-assert.equal(ip.range("52.123.3.5-2").errors, "IP subnet mask error, check start and end range: 52.123.3.5 - 52.123.3.2");
+assert.equal(ip.range("52.123.5-3.*").errors, "Internal error in ip-subnet-calculator for ip range value: 52.123.5-3.*");
+assert.equal(ip.range("52.123.3.5-2").errors, "Internal error in ip-subnet-calculator for ip range value: 52.123.3.5-2");
 
 assert(!ip.range('1.0.1.*').contains('1.0.0.10'));
 assert(ip.range('1.2.3.4-10').contains('1.2.3.4', '1.2.3.10'));
